@@ -69,6 +69,38 @@ body {
     transition: transform 0.1s linear;
 }
 
+.ground-lines {
+    position: absolute;
+    bottom: 60px;
+    width: 200%;
+    height: 6px;
+    background:
+        repeating-linear-gradient(
+            to right,
+            #65a30d 0 40px,
+            transparent 40px 70px
+        );
+
+    animation: moveGround 2s linear infinite;
+}
+
+@keyframes moveGround {
+
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}
+
+.cactus {
+    position: absolute;
+    bottom: 60px;
+    right: -60px;
+    font-size: 42px;
+}
+
 .ground {
     position: absolute;
     bottom: 0;
