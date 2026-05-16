@@ -66,6 +66,7 @@ body {
     bottom: 60px;
     left: 70px;
     font-size: 52px;
+    transition: transform 0.1s linear;
 }
 
 .ground {
