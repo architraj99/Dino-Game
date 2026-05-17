@@ -1,6 +1,8 @@
 let dino = document.getElementById("dino");
 let score = document.getElementById("score");
 
+let speedText = document.getElementById("speedText");
+
 let gameArea = document.querySelector(".game-area");
 
 let gameOver = document.getElementById("gameOver");
@@ -10,6 +12,8 @@ let gameRunning = true;
 let position = 60;
 let velocity = 0;
 let gravity = 0.9;
+let gameScore = 0;
+let obstacleSpeed = 6;
 
 function jump() {
 
@@ -42,6 +46,22 @@ function stopGame() {
 
     gameRunning = false;
     gameOver.style.display = "block";
+}
+
+function updateScore() {
+
+    if(!gameRunning) {
+        return;
+    }
+
+    gameScore++;
+    score.innerText = gameScore;
+    speedText.innerText = obstacleSpeed.toFixed(1) + "x";
+
+    if(gameScore % 20 === 0) {
+
+        obstacleSpeed += 0.5;
+    }
 }
 
 function checkCollision(cactus) {
@@ -81,7 +101,7 @@ function createObstacle() {
 
             }
 
-            cactusPosition += 6;
+            cactusPosition += obstacleSpeed;
             cactus.style.right =cactusPosition + "px";
 
             checkCollision(cactus);
@@ -98,6 +118,10 @@ function createObstacle() {
 setInterval(function() {
     createObstacle();
 }, 2200);
+
+setInterval(function() {
+    updateScore();
+}, 300);
 
 document.addEventListener(
     "keydown",
