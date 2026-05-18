@@ -7,6 +7,8 @@ let gameArea = document.querySelector(".game-area");
 
 let gameOver = document.getElementById("gameOver");
 
+let restartBtn = document.getElementById("restartBtn");
+
 let isJumping = false;
 let gameRunning = true;
 let position = 60;
@@ -22,7 +24,13 @@ function jump() {
     }
 
     isJumping = true;
-    velocity = 14;
+    velocity = 15;
+    dino.style.transform = "rotate(-10deg)";
+
+    setTimeout(function() {
+        dino.style.transform = "rotate(0deg)";
+
+    }, 300);
 }
 
 function updateJump() {
@@ -46,6 +54,7 @@ function stopGame() {
 
     gameRunning = false;
     gameOver.style.display = "block";
+    restartBtn.style.display = "block";
 }
 
 function updateScore() {
@@ -58,9 +67,9 @@ function updateScore() {
     score.innerText = gameScore;
     speedText.innerText = obstacleSpeed.toFixed(1) + "x";
 
-    if(gameScore % 20 === 0) {
+    if(gameScore % 25 === 0) {
 
-        obstacleSpeed += 0.5;
+        obstacleSpeed += 0.4;
     }
 }
 
@@ -69,8 +78,8 @@ function checkCollision(cactus) {
     let dinoRect = dino.getBoundingClientRect();
     let cactusRect = cactus.getBoundingClientRect();
 
-    if (dinoRect.right > cactusRect.left && dinoRect.left < cactusRect.right &&
-        dinoRect.bottom > cactusRect.top) {
+    if (dinoRect.right - 18> cactusRect.left && dinoRect.left + 18 < cactusRect.right &&
+        dinoRect.bottom - 12 > cactusRect.top) {
 
         stopGame();
     }
@@ -106,7 +115,7 @@ function createObstacle() {
 
             checkCollision(cactus);
 
-            if (cactusPosition > 1000) {
+            if (cactusPosition > 1200) {
 
                 clearInterval(obstacleMove);
                 cactus.remove();
@@ -117,7 +126,7 @@ function createObstacle() {
 
 setInterval(function() {
     createObstacle();
-}, 2200);
+}, 2600);
 
 setInterval(function() {
     updateScore();
@@ -130,6 +139,13 @@ document.addEventListener(
 
             jump();
         }
+    }
+);
+
+restartBtn.addEventListener("click",
+    function() {
+
+        location.reload();
     }
 );
 

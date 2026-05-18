@@ -6,11 +6,13 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background: linear-gradient(
-        to bottom,
-        #dbeafe,
-        #f8fafc
-    );
+
+    background:
+        linear-gradient(
+            to bottom,
+            #bfdbfe,
+            #eff6ff
+        );
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -26,29 +28,29 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 12px;
     margin-bottom: 16px;
 }
 
 .top-bar h1 {
-    font-size: 32px;
-    color: #111827;
+    font-size: 34px;
+    color: #0f172a;
 }
 
-.score-box {
+.stats {
+    display: flex;
+    gap: 12px;
+}
+
+.score-box,
+.speed-box {
     background: white;
     padding: 10px 16px;
-    border-radius: 12px;
-    border: 1px solid #d1d5db;
+    border-radius: 14px;
+    border: 1px solid #dbeafe;
     font-weight: bold;
 }
 
 .speed-box {
-    background: white;
-    padding: 10px 16px;
-    border-radius: 12px;
-    border: 1px solid #d1d5db;
-    font-weight: bold;
     color: #2563eb;
 }
 
@@ -57,39 +59,85 @@ body {
     height: 320px;
     overflow: hidden;
     background: white;
-    border-radius: 22px;
-    border: 2px solid #dbeafe;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    border-radius: 24px;
+    border: 2px solid #bfdbfe;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+.sun {
+    position: absolute;
+    top: 28px;
+    left: 70px;
+    width: 55px;
+    height: 55px;
+    background: #facc15;
+    border-radius: 50%;
+    box-shadow: 0 0 30px rgba(250,204,21,0.7);
 }
 
 .cloud {
     position: absolute;
-    top: 40px;
-    right: 120px;
+    top: 45px;
+    right: -120px;
     width: 90px;
     height: 30px;
-    background: #e5e7eb;
+    background: #e2e8f0;
     border-radius: 40px;
-    opacity: 0.7;
+    opacity: 0.8;
+
+    animation: cloudMove 18s linear infinite;
+}
+
+@keyframes cloudMove {
+
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(-1200px);
+    }
+
 }
 
 .dino {
     position: absolute;
     bottom: 60px;
     left: 70px;
-    font-size: 52px;
+    font-size: 54px;
+
     transition: transform 0.1s linear;
 }
 
 .game-over {
     position: absolute;
-    top: 40%;
+    top: 38%;
     width: 100%;
     text-align: center;
-    font-size: 42px;
+    font-size: 44px;
     font-weight: bold;
     color: #dc2626;
     display: none;
+}
+
+#restartBtn {
+    position: absolute;
+    top: 58%;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    padding: 12px 20px;
+    border: none;
+    border-radius: 12px;
+    background: #2563eb;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+    display: none;
+}
+
+#restartBtn:hover {
+    background: #1d4ed8;
 }
 
 .ground-lines {
@@ -97,6 +145,7 @@ body {
     bottom: 60px;
     width: 200%;
     height: 6px;
+
     background:
         repeating-linear-gradient(
             to right,
@@ -115,6 +164,7 @@ body {
     to {
         transform: translateX(-50%);
     }
+
 }
 
 .cactus {
